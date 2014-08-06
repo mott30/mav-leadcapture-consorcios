@@ -1,0 +1,21 @@
+/*
+		CONSORCIO META-BOXES
+ */
+#consorcio_credito {
+	padding: 10px 10px 10px 40px;
+	font-family: sans-serif;
+	font-size: 22px;
+	font-weight: bold;
+	width: 100%;
+}
+.rwmb-input span{
+	float: left;
+	position: absolute;
+	margin: 16px;
+	font-family: sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+}
+.rwmb-text-list{
+	max-width: 31%;
+}
