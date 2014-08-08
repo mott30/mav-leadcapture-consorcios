@@ -1,5 +1,5 @@
 # MAV Lead Capture - Consórcios
-~Current Version:1.1~
+~Current Version:2.0~
 
 ### Autor
 Luciano Tonet [@tonetlds](https://github.com/tonetlds)
