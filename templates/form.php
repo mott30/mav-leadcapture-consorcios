@@ -38,7 +38,7 @@
                <br />
 
                <?php
-                  $consorcioField = 'credito';
+                  $consorcioField = isset( $_POST['simulacao_tipo'] ) ? $_POST['simulacao_tipo'] : 'credito';
                   if( $consorcioField == 'credito'){
                      $selectedParcela = "";
                      $selectedCredito = "selected";
@@ -61,28 +61,55 @@
                <div class="consorcioRangeParcelaContainer">
                   <center><strong>Valor da Parcela</strong></center>
                   <?php
-   
-                     $consorcioRangeMin = "10";       // Valor Mínimo
-                     $consorcioRangeMax = "1000";  // Valor Máximo
+                     
+                     $consorcioParcelaMin    = "230";       // Valor Mínimo
+                     $consorcioParcelaMax    = "5000";     // Valor Máximo
+                     $consorcioParcelaValues = isset($_POST['consorcioRangeParcela']) ? $_POST['consorcioRangeParcela'] : $consorcioParcelaMin .','.$consorcioParcelaMax;
    
                   ?>
-                  <i><small>R$</small> <strong class="consorcioRangeParcelaMin"><?php echo $consorcioRangeMin ?></strong></i>
-                  <i style="float:right;"><small>R$</small> <strong class="consorcioRangeParcelaMax"><?php echo $consorcioRangeMax ?></strong></i><br />
-                  <input id="consorcioRangeParcela" name="consorcioRangeParcela" type="text" class="inputSlider" value="<?php echo $consorcioRangeMin ?>,<?php echo $consorcioRangeMax ?>" data-slider-min="10" data-slider-max="1000" data-slider-step="10" data-slider-value="[<?php echo $consorcioRangeMin ?>,<?php echo $consorcioRangeMax ?>]"/>
+                  <i>Entre <small>R$</small> <strong class="consorcioRangeParcelaMin"><?php echo $consorcioParcelaMin ?></strong></i>
+                  <i style="float:right;">e <small>R$</small> <strong class="consorcioRangeParcelaMax"><?php echo $consorcioParcelaMax ?></strong></i><br />
+                  <input 
+                     id="consorcioRangeParcela"
+                     name="consorcioRangeParcela"
+                     type="text"
+                     class="inputSlider"
+                     value="<?php echo $consorcioParcelaValues ?>"
+                     data-slider-min="<?php echo $consorcioParcelaMin ?>" 
+                     data-slider-max="<?php echo $consorcioParcelaMax ?>" 
+                     data-slider-step="100"
+                     data-slider-value="[<?php echo $consorcioParcelaValues ?>]"
+                  />
                   <br />
                </div>
                <div class="consorcioRangeCreditoContainer">
                   <center><strong>Valor do Crédito</strong></center>
-                  
-                  <i><small>R$</small> <strong class="consorcioRangeCreditoMin"><?php echo $consorcioRangeMin ?></strong></i>
-                  <i style="float:right;"><small>R$</small> <strong class="consorcioRangeCreditoMax"><?php echo $consorcioRangeMax ?></strong></i><br />
-                  <input id="consorcioRangeCredito" name="consorcioRangeCredito" type="text" class="inputSlider" value="<?php echo $consorcioRangeMin ?>,<?php echo $consorcioRangeMax ?>" data-slider-min="10" data-slider-max="1000" data-slider-step="10" data-slider-value="[<?php echo $consorcioRangeMin ?>,<?php echo $consorcioRangeMax ?>]"/>
+                   <?php
+   
+                     $consorcioCreditoMin = "40000";       // Valor Mínimo
+                     $consorcioCreditoMax = "540000";     // Valor Máximo
+                     $consorcioCreditoValues = isset($_POST['consorcioRangeCredito']) ? $_POST['consorcioRangeCredito'] : $consorcioCreditoMin .','.$consorcioCreditoMax;
+   
+                  ?>
+                  <i><small>R$</small> <strong class="consorcioRangeCreditoMin"><?php echo $consorcioCreditoMin ?></strong></i>
+                  <i style="float:right;"><small>R$</small> <strong class="consorcioRangeCreditoMax"><?php echo $consorcioCreditoMax ?></strong></i><br />
+                  <input
+                     id="consorcioRangeCredito" 
+                     name="consorcioRangeCredito"
+                     type="text" 
+                     class="inputSlider" 
+                     value="<?php echo $consorcioCreditoValues ?>"
+                     data-slider-min="<?php echo $consorcioCreditoMin ?>"
+                     data-slider-max="<?php echo $consorcioCreditoMax ?>"
+                     data-slider-step="100"
+                     data-slider-value="[<?php echo $consorcioCreditoValues ?>]"
+                  />
                   <br />
                  </div>
                
                <label>&nbsp;</label>
                <label>&nbsp;</label>
-               <input type="submit" class="btn btn-success btn-lg btn-block formSubmit" value="Simular">
+               <input type="submit" class="btn btn-danger btn-lg btn-block formSubmit" value="Simular">
                <br />
 
             </div>
@@ -127,7 +154,7 @@ jQuery(document).ready(function($){
 
    
    
-   if( $("#consorcioField") == "parcela"){
+   if( $('#consorcioField').val() == "parcela"){
       $(".consorcioRangeParcelaContainer").show(0);
    }else{
       $(".consorcioRangeCreditoContainer").show(0);

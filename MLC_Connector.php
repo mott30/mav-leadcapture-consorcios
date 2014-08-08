@@ -33,29 +33,32 @@
 
          
          $request_data  = array(
-                              'API_version'    => '1.0',
-                              'MLC_debug'      => MLC_DEBUG,
-                              'client_key'     => USER_KEY
+                              'API_KEY'        => MLC_USERKEY,
+                              'sandbox'        => MLC_SANDBOX
                            );
          
          if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             $request_data  = array_merge( $request_data, $_POST );
          }                              
 
-         $hashkey       = base64_encode(serialize($request_data));
+         $hashkey       = base64_encode( serialize($request_data) ) . '&sandbox=' . MLC_SANDBOX;
 
-         $request_url   = 'http://api.lucianotonet.com/mav-lc/?hash='.$hashkey;
-         $response      = get_url($request_url);
+         $request_url   = 'http://lucianotonet.com/api/mav-lc/?hash='.$hashkey;
+         // Retorno encriptado
+         $response      = get_url( $request_url );
 
-         //$arrayresponse = unserialize(base64_decode($response));
-         $arrayresponse = unserialize(base64_decode($response));
 
-         return $arrayresponse;
+         $wtf = new MLC_Debugger();
+         if( MLC_SANDBOX ){       
+            // Com sandbox ativo o retorno não vem criptografado
+            // basta exibi-los  
+            $wtf->debugThis( $response );
+         }else{
+            // Decripta o retorno
+            $arrayresponse = unserialize( base64_decode($response) );
+            return $arrayresponse;
+         }
 
       }
 
    }
-      
-
-
-?>
