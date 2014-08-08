@@ -37,7 +37,7 @@ define('MLC_SANDBOX', true);
 include( plugin_dir_path( __FILE__ ) . 'MLC_Simulador.php' );
 include( plugin_dir_path( __FILE__ ) . 'MLC_Debugger.php' );
 include( plugin_dir_path( __FILE__ ) . 'MLC_Connector.php' );
-include( plugin_dir_path( __FILE__ ) . 'MLC_Updater.php' );
+include( plugin_dir_path( __FILE__ ) . 'MLC_Updater.php' ); //https://github.com/jkudish/WordPress-GitHub-Plugin-Updater
 
 // SHOTRCODE [simulador]
 add_shortcode( 'simulador', array( 'MLC_Simulador' , 'showForm') );
