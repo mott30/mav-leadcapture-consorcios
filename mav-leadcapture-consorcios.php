@@ -1,14 +1,14 @@
 <?php
 /**
  * @package MAV Lead Capture - Consórcios
- * @version 0.1
+ * @version 1.0
  */
 /*
 Plugin Name: MAV Lead Capture - Consórcios
 Plugin URI: https://github.com/MAVResultadosOnline/mav-leadcapture-consorcios
 Description: Plugin para simulação de consórcios e captura de contatos.
 Author: Luciano Tonet
-Version: 0.1
+Version: 1.0
 Author URI: http://lucianotonet.com
 */
 /*
