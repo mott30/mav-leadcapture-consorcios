@@ -3,4 +3,4 @@
 
 ### Autor
 Luciano Tonet [@tonetlds](https://github.com/tonetlds)
-[http://lucianotonet.com](lucianotonet.com)
+[lucianotonet.com](http://lucianotonet.com)
