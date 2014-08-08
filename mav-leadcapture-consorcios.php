@@ -33,15 +33,15 @@ Author URI: http://lucianotonet.com
 
 define('MLC_USERKEY', '81dc9bdb52d04dc20036dbd8313ed055');
 define('MLC_SANDBOX', true);
-define('MLC_DEBUG', true);
 
-
-include( plugin_dir_path( __FILE__ ) . 'MLC_Simulador.php');
-include( plugin_dir_path( __FILE__ ) . 'MLC_Debugger.php');
-include( plugin_dir_path( __FILE__ ) . 'MLC_Connector.php');
+include( plugin_dir_path( __FILE__ ) . 'MLC_Simulador.php' );
+include( plugin_dir_path( __FILE__ ) . 'MLC_Debugger.php' );
+include( plugin_dir_path( __FILE__ ) . 'MLC_Connector.php' );
+include( plugin_dir_path( __FILE__ ) . 'MLC_Updater.php' );
 
 // SHOTRCODE [simulador]
 add_shortcode( 'simulador', array( 'MLC_Simulador' , 'showForm') );
+
 
 // Inclui o Bootstrap (js e css) 
 // No formulário e tabela 
@@ -59,3 +59,20 @@ function simulador_bootstrap() {
    wp_enqueue_script( 'bootstrapSliderJs', plugins_url( '/js/bootstrap-slider.js' , __FILE__ ), 'bootstrapJs' );
 }
 add_action( 'wp_enqueue_scripts', 'simulador_bootstrap' );
+
+
+if (is_admin()) { // note the use of is_admin() to double check that this is happening in the admin
+    $config = array(
+        'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
+        'proper_folder_name' => 'plugin-name', // this is the name of the folder your plugin lives in
+        'api_url' => 'https://api.github.com/repos/username/repository-name', // the github API url of your github repo
+        'raw_url' => 'https://raw.github.com/username/repository-name/master', // the github raw url of your github repo
+        'github_url' => 'https://github.com/username/repository-name', // the github url of your github repo
+        'zip_url' => 'https://github.com/username/repository-name/zipball/master', // the zip url of the github repo
+        'sslverify' => true // wether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
+        'requires' => '3.0', // which version of WordPress does your plugin require?
+        'tested' => '3.3', // which version of WordPress is your plugin tested up to?
+        'readme' => 'README.MD' // which file to use as the readme for the version number
+    );
+    new WPGitHubUpdater($config);
+}

@@ -11,8 +11,8 @@
        */
       public function showForm($style='')
       {
-         echo include(  plugin_dir_path( __FILE__ ) . 'templates/form.php');
-
+         
+         include(  plugin_dir_path( __FILE__ ) . 'templates/form.php');
          if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             /**
@@ -82,7 +82,7 @@
                }
                
                foreach ($data as $value) {
-                  echo $value['mlc_credito'];
+                  
                   $output .= '<tr>
                                  <td><strong>' . FazMeRir( $value['mlc_credito'] ) . '</strong></td>
                                  <td>'.$value['mlc_prazo1'].' meses</td>

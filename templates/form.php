@@ -164,6 +164,25 @@ jQuery(document).ready(function($){
       $(".consorcioRangeCreditoContainer, .consorcioRangeParcelaContainer").toggle(0);
    });
 
+   // Inicia com os valores certos
+   <?php
+
+      if( isset($_POST["consorcioRangeParcela"]) and  isset($_POST["consorcioRangeCredito"]) ){
+
+   ?>
+   
+         var consorcioRangeParcela = explode( ',', '<?php echo @$_POST["consorcioRangeParcela"] ?>' );
+         var consorcioRangeCredito = explode( ',', '<?php echo @$_POST["consorcioRangeCredito"] ?>' );
+
+         $(".consorcioRangeParcelaMin").html( consorcioRangeParcela[0] );
+         $(".consorcioRangeParcelaMax").html( consorcioRangeParcela[1] );
+         $(".consorcioRangeCreditoMin").html( consorcioRangeCredito[0] );
+         $(".consorcioRangeCreditoMax").html( consorcioRangeCredito[1] );
+
+   <?php
+      }
+   ?>
+
 
 });
 </script>
