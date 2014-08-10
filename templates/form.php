@@ -62,7 +62,7 @@
                   <center><strong>Valor da Parcela</strong></center>
                   <?php
                      
-                     $consorcioParcelaMin    = "230";       // Valor Mínimo
+                     $consorcioParcelaMin    = "0";       // Valor Mínimo
                      $consorcioParcelaMax    = "5000";     // Valor Máximo
                      $consorcioParcelaValues = isset($_POST['consorcioRangeParcela']) ? $_POST['consorcioRangeParcela'] : $consorcioParcelaMin .','.$consorcioParcelaMax;
    
@@ -77,7 +77,7 @@
                      value="<?php echo $consorcioParcelaValues ?>"
                      data-slider-min="<?php echo $consorcioParcelaMin ?>" 
                      data-slider-max="<?php echo $consorcioParcelaMax ?>" 
-                     data-slider-step="100"
+                     data-slider-step="50"
                      data-slider-value="[<?php echo $consorcioParcelaValues ?>]"
                   />
                   <br />

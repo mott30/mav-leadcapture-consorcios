@@ -14,7 +14,7 @@ class MLC_Debugger
          if($source){
             echo '<pre><code>';
             echo 'Sandbox debug local<br><br>POST:<br>';
-            var_dump($_POST);
+            print_r($_POST);
             echo '</code></pre>';
             echo '<pre><code>';
             print_r($source);

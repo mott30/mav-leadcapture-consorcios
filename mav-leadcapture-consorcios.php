@@ -1,14 +1,10 @@
 <?php
-/**
- * @package MAV Lead Capture - Consórcios
- * @version 1.0
- */
 /*
 Plugin Name: MAV Lead Capture - Consórcios
 Plugin URI: https://github.com/MAVResultadosOnline/mav-leadcapture-consorcios
 Description: Plugin para simulação de consórcios e captura de contatos.
 Author: Luciano Tonet
-Version: 1.0
+Version: 0.1
 Author URI: http://lucianotonet.com
 */
 /*
@@ -32,32 +28,39 @@ Author URI: http://lucianotonet.com
 
 
 define('MLC_USERKEY', '81dc9bdb52d04dc20036dbd8313ed055');
-define('MLC_SANDBOX', true);
+define('MLC_SANDBOX', false);
+
+define('RESULTS_STYLE', '1'); // FAZERPEGAR ESTILO PELO SHORTCODE
 
 include( plugin_dir_path( __FILE__ ) . 'MLC_Simulador.php' );
 include( plugin_dir_path( __FILE__ ) . 'MLC_Debugger.php' );
 include( plugin_dir_path( __FILE__ ) . 'MLC_Connector.php' );
 
 // SHOTRCODE [simulador]
-add_shortcode( 'simulador', array( 'MLC_Simulador' , 'showForm') );
+$simulador = new MLC_Simulador();
 
 
 // Inclui o Bootstrap (js e css) 
 // No formulário e tabela 
-function simulador_bootstrap() {  
-   wp_enqueue_script( 'bootstrapJs', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js', array( 'jquery' ) );   
-   wp_enqueue_style( 'bootstrapCss', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' );
+function mlc_simulador_bootstrap() {  
+   if ( is_page( 'simulador' ) ) {    
+      
+      wp_enqueue_script( 'bootstrapJs', 'http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js', array( 'jquery' ) );   
+      wp_enqueue_style( 'bootstrapCss', 'http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' );
 
-   // Bootstrap Slider
-   // --> http://www.eyecon.ro/bootstrap-slider/
-   // --> http://seiyria.github.io/bootstrap-slider/
+      // Bootstrap Slider
+      // --> http://www.eyecon.ro/bootstrap-slider/
+      // --> http://seiyria.github.io/bootstrap-slider/
 
-   //Bootstrap Slider CSS
-   wp_enqueue_style( 'bootstrapSliderCss', plugins_url( '/css/bootstrap-slider.css' , __FILE__ ) );
-   //Bootstrap Slider JS
-   wp_enqueue_script( 'bootstrapSliderJs', plugins_url( '/js/bootstrap-slider.js' , __FILE__ ), 'bootstrapJs' );
+      //Bootstrap Slider CSS
+      wp_enqueue_style( 'bootstrapSliderCss', plugins_url( '/css/bootstrap-slider.css' , __FILE__ ) );
+      //Bootstrap Slider JS
+      wp_enqueue_script( 'bootstrapSliderJs', plugins_url( '/js/bootstrap-slider.js' , __FILE__ ), 'bootstrapJs' );
+
+   }
 }
-add_action( 'wp_enqueue_scripts', 'simulador_bootstrap' );
+add_action( 'wp_enqueue_scripts', 'mlc_simulador_bootstrap' );
+
 
 
 add_action( 'init', 'github_plugin_updater_test_init' );
@@ -88,4 +91,23 @@ function github_plugin_updater_test_init() {
 
    }
 
+}
+
+/**
+ *    FazMeRir Format
+ *       PHP         
+ *  
+ *    Fomatação monetária
+ *    
+ */
+function fazmerir( $quanto='1.99', $moeda='R$' )
+{
+   if($quanto == ""){
+      return false;
+   }else{
+
+      $quantoMesmo = number_format( $quanto, 2, ',', '.' );
+      return $moeda . " " . $quantoMesmo;
+
+   }
 }
